@@ -98,20 +98,13 @@ Entering:
     li $v0, 1
     move $a0, $s6
     syscall
-
+exit:
     li $v0, 10
     syscall
-
 
 
 ERROR:
     li $v0, 4
     la $a0, error_mess
     syscall
-    j Entering
-
-
-    
-
-
-
+    j exit

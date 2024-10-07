@@ -18,15 +18,12 @@ main:
 check:
 #since newline is 0xA in hexa, we just check
 #if there's a newline in our string then remove them
-
 	lb $t1, 0($t0)
-	beq $t1, 0, output
-	beq $t1, 10, remove_newline
+	beq $t1, 10, sanitize
 	addi $t0, $t0, 1
 	j check
-remove_newline:
-	sb $0, 0($t0)
-	
+sanitize:
+	sb $zero, 0($t0)
 output:
 	li $v0, 4
 	la $a0, request
@@ -35,10 +32,8 @@ output:
 	li $v0, 4
 	la $a0, input_str
 	syscall
-	
 	li $v0, 4
 	la $a0, exclam
 	syscall
-	
 	li $v0, 10
 	syscall
